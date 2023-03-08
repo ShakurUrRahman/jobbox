@@ -16,8 +16,6 @@ const EmployerRegistration = () => {
   const navigate = useNavigate();
   const [postUser, { isLoading, isError }] = useRegisterMutation();
 
-
-
   const businessCategory = [
     "Automotive",
     "Business Support & Supplies",

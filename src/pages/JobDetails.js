@@ -1,8 +1,17 @@
 import React from "react";
-
 import meeting from "../assets/meeting.jpg";
 import { BsArrowRightShort, BsArrowReturnRight } from "react-icons/bs";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useApplyMutation, useJobByIdQuery } from "../features/job/jobApi";
+import { useSelector } from "react-redux";
+import { toast } from "react-hot-toast";
+
+
 const JobDetails = () => {
+  const { user } = useSelector(state => state.auth);
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { data, isLoading, isError } = useJobByIdQuery(id);
   const {
     companyName,
     position,
@@ -17,7 +26,24 @@ const JobDetails = () => {
     overview,
     queries,
     _id,
-  } = {};
+  } = data?.data || {};
+  const [apply] = useApplyMutation();
+
+  const handleApply = () => {
+    if (user.role === "employer") {
+      toast.error("You need a candidate account to apply")
+    }
+    if (user.role === "") {
+      navigate("/register");
+      return;
+    }
+    const data = {
+      userId: user._id,
+      email: user.email,
+      jobId: _id
+    };
+    apply(data);
+  }
 
   return (
     <div className='pt-14 grid grid-cols-12 gap-5'>
@@ -28,7 +54,7 @@ const JobDetails = () => {
         <div className='space-y-5'>
           <div className='flex justify-between items-center mt-5'>
             <h1 className='text-xl font-semibold text-primary'>{position}</h1>
-            <button className='btn'>Apply</button>
+            <button onClick={handleApply} className='btn'>Apply</button>
           </div>
           <div>
             <h1 className='text-primary text-lg font-medium mb-3'>Overview</h1>
@@ -37,8 +63,8 @@ const JobDetails = () => {
           <div>
             <h1 className='text-primary text-lg font-medium mb-3'>Skills</h1>
             <ul>
-              {skills.map((skill) => (
-                <li className='flex items-center'>
+              {skills?.map((skill, i) => (
+                <li key={i} className='flex items-center'>
                   <BsArrowRightShort /> <span>{skill}</span>
                 </li>
               ))}
@@ -49,8 +75,8 @@ const JobDetails = () => {
               Requirements
             </h1>
             <ul>
-              {requirements.map((skill) => (
-                <li className='flex items-center'>
+              {requirements?.map((skill, i) => (
+                <li key={i} className='flex items-center'>
                   <BsArrowRightShort /> <span>{skill}</span>
                 </li>
               ))}
@@ -61,8 +87,8 @@ const JobDetails = () => {
               Responsibilities
             </h1>
             <ul>
-              {responsibilities.map((skill) => (
-                <li className='flex items-center'>
+              {responsibilities?.map((skill, i) => (
+                <li key={i} className='flex items-center'>
                   <BsArrowRightShort /> <span>{skill}</span>
                 </li>
               ))}
@@ -76,8 +102,8 @@ const JobDetails = () => {
               General Q&A
             </h1>
             <div className='text-primary my-2'>
-              {queries.map(({ question, email, reply, id }) => (
-                <div>
+              {queries?.map(({ question, email, reply, id }, i) => (
+                <div key={i}>
                   <small>{email}</small>
                   <p className='text-lg font-medium'>{question}</p>
                   {reply?.map((item) => (
@@ -160,9 +186,9 @@ const JobDetails = () => {
           </div>
           <div>
             <p>Website</p>
-            <a className='font-semibold text-lg' href='#'>
+            <Link className='font-semibold text-lg' href='#'>
               https://website.com
-            </a>
+            </Link>
           </div>
         </div>
       </div>

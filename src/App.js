@@ -8,8 +8,8 @@ import auth from "./firebase/firebase.config";
 import routes from "./routes/routes";
 
 const App = () => {
-  const { isLoading } = useSelector(state => state.auth)
-  console.log(isLoading);
+  // const { isLoading } = useSelector(state => state.auth)
+  // console.log(isLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {
