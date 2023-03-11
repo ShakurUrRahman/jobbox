@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import hero1 from "../../assets/hero-01.jpg";
 import hero2 from "../../assets/hero-02.jpg";
 import hero3 from "../../assets/hero-03.jpg";
@@ -96,7 +96,7 @@ const Landing = () => {
         />
       </div>
       <div className='h-full w-full flex items-center z-10 relative'>
-        <div className='flex w-full'>
+        <div className='flex w-full mx-10'>
           <div className='w-1/2 flex flex-col items-start'>
             <h1 id='hero-title' className='heroElement font-bold text-7xl'>
               Find the perfect <br /> job for you

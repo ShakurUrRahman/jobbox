@@ -7,10 +7,9 @@ import { usePostJobMutation } from "../../features/job/jobApi";
 const AddJob = () => {
   const { user: { companyName } } = useSelector(state => state.auth);
   const [postJob, { isLoading, isError }] = usePostJobMutation();
-  const { handleSubmit, register, control } = useForm({
+  const { handleSubmit, register, control, reset } = useForm({
     defaultValues:
       { companyName }
-
   });
   const {
     fields: resFields,
@@ -31,6 +30,7 @@ const AddJob = () => {
   const onSubmit = (data) => {
     console.log(data);
     postJob({ ...data, applicants: [], queries: [] });
+    reset();
   };
 
   return (

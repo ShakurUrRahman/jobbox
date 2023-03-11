@@ -18,7 +18,7 @@ const AccountCreator = () => {
   }
 
   return (
-    <div className='h-screen pt-14'>
+    <div className=' py-14 '>
       <h1 className='text-center my-10 text-2xl'>Continue as ...</h1>
       <div className='flex justify-evenly '>
         <div

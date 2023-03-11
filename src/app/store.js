@@ -1,6 +1,7 @@
 import apiSlice from "../features/api/apiSlice";
 import authSlice from "../features/auth/authSlice";
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 const store = configureStore({
     reducer: {
@@ -8,7 +9,7 @@ const store = configureStore({
         auth: authSlice,
     },
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(apiSlice.middleware),
+        getDefaultMiddleware().concat((apiSlice.middleware))
 });
 
 export default store;

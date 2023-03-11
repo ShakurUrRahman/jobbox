@@ -72,7 +72,7 @@ const JobDetails = () => {
   }
 
   return (
-    <div className='pt-14 grid grid-cols-12 gap-5'>
+    <div className='pt-14 grid grid-cols-12 gap-5 lg:mx-14'>
       <div className='col-span-9 mb-10'>
         <div className='h-80 rounded-xl overflow-hidden'>
           <img className='h-full w-full object-cover' src={meeting} alt='' />
@@ -214,7 +214,7 @@ const JobDetails = () => {
           </div>
           <div>
             <p>Email</p>
-            <h1 className='font-semibold text-lg'>company.email@name.com</h1>
+            <h1 className='font-semibold text-base'>company.email@name.com</h1>
           </div>
           <div>
             <p>Company Location</p>

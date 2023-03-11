@@ -22,10 +22,10 @@ const App = () => {
     })
   }, [])
   return (
-    <>
+    <div>
       <Toaster />
       <RouterProvider router={routes} />
-    </>
+    </div>
   );
 }
 
